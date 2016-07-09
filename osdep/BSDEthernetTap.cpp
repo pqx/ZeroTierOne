@@ -326,6 +326,7 @@ void BSDEthernetTap::scanMulticastGroups(std::vector<MulticastGroup> &added,std:
 {
 	std::vector<MulticastGroup> newGroups;
 
+#ifdef getifmaddrs
 	struct ifmaddrs *ifmap = (struct ifmaddrs *)0;
 	if (!getifmaddrs(&ifmap)) {
 		struct ifmaddrs *p = ifmap;
@@ -340,6 +341,7 @@ void BSDEthernetTap::scanMulticastGroups(std::vector<MulticastGroup> &added,std:
 		}
 		freeifmaddrs(ifmap);
 	}
+#endif
 
 	std::vector<InetAddress> allIps(ips());
 	for(std::vector<InetAddress>::iterator ip(allIps.begin());ip!=allIps.end();++ip)
@@ -364,6 +366,7 @@ void BSDEthernetTap::scanMulticastGroups(std::vector<MulticastGroup> &added,std:
 bool BSDEthernetTap::updateMulticastGroups(std::set<MulticastGroup> &groups)
 {
 	std::set<MulticastGroup> newGroups;
+#ifdef getifmaddrs
 	struct ifmaddrs *ifmap = (struct ifmaddrs *)0;
 	if (!getifmaddrs(&ifmap)) {
 		struct ifmaddrs *p = ifmap;
@@ -378,6 +381,7 @@ bool BSDEthernetTap::updateMulticastGroups(std::set<MulticastGroup> &groups)
 		}
 		freeifmaddrs(ifmap);
 	}
+#endif
 
 	{
 		std::set<InetAddress> allIps(ips());

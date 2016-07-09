@@ -121,7 +121,11 @@ static std::vector<_RTE> _getRTEs(const InetAddress &target,bool contains)
 					InetAddress sa_t,sa_v;
 					int deviceIndex = -9999;
 
-					if (((rtm->rtm_flags & RTF_LLINFO) == 0)&&((rtm->rtm_flags & RTF_HOST) == 0)&&((rtm->rtm_flags & RTF_UP) != 0)&&((rtm->rtm_flags & RTF_MULTICAST) == 0)) {
+					if (((rtm->rtm_flags & RTF_LLINFO) == 0)&&((rtm->rtm_flags & RTF_HOST) == 0) && ((rtm->rtm_flags & RTF_UP) != 0)
+#ifdef RTF_MULTICAST
+&& ((rtm->rtm_flags & RTF_MULTICAST) == 0)
+#endif
+) {
 						int which = 0;
 						while (saptr < saend) {
 							struct sockaddr *sa = (struct sockaddr *)saptr;

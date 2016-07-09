@@ -114,6 +114,10 @@ namespace ZeroTier { typedef WindowsEthernetTap EthernetTap; }
 #include "../osdep/BSDEthernetTap.hpp"
 namespace ZeroTier { typedef BSDEthernetTap EthernetTap; }
 #endif // __FreeBSD__
+#ifdef __NetBSD__
+#include "../osdep/BSDEthernetTap.hpp"
+namespace ZeroTier { typedef BSDEthernetTap EthernetTap; }
+#endif // __FreeBSD__
 
 #endif // ZT_SERVICE_NETCON
 
